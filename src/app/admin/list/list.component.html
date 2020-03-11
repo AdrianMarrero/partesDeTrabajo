@@ -1,0 +1,77 @@
+
+<div class="container">
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">First and last name</span>
+    </div>
+    <input type="text" aria-label="First name" class="form-control">
+    <input type="text" aria-label="Last name" class="form-control">
+    <button type="button" class="btn btn-primary ml-5">Consultar</button>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary mb-2" routerLink="/nuevo-parte">Nuevo Parte</button>
+    </div>
+    <div class="col-sm-2">
+      <label class="badge badge-warning">Obra</label>
+    </div>
+    <div class="col-sm-2">
+      <label class="badge badge-danger">Avería</label>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-success btn-sm" (click)="habilitarEdicion()">Habilitar edición</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora de Entrada</th>
+          <th scope="col">Hora de Salida</th>
+          <th scope="col">Lugar</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Tiempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parte of partesList; let i = index">
+          <th>{{ parte.fecha | date }}</th>
+          <td>{{ parte.horaEntrada }}</td>
+          <td>{{ parte.horaSalida }}</td>
+          <td>{{ parte.lugar }}</td>
+          <td>
+            <label *ngIf="parte.tipoDeTrabajo === 'Obra'" class="badge badge-warning">{{ parte.tipoDeTrabajo }}</label>
+            <label *ngIf="parte.tipoDeTrabajo === 'Avería'" class="badge badge-danger">{{ parte.tipoDeTrabajo }}</label>
+            <label *ngIf="parte.tipoDeTrabajo === 'Mantenimiento'" class="badge badge-info">{{ parte.tipoDeTrabajo }}</label>
+          </td>
+          <td>{{ parte.totalHoras }}</td>
+          <td>
+            <button type="button"
+                          class="btn btn-primary btn-sm" [disabled]="!editmode ? 'disabled': null"
+                          [routerLink]="['/parte', i]">
+                          <i class="fa fa-pen"></i>
+                          Editar
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" [disabled]="!editmode ? 'disabled': null"><i class="fa fa-trash"></i>Eliminar</button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-info text-center mt-3">
+    <h4 class="alert-heading">Cargando</h4>
+    <p><i class="fa fa-sync-alt fa-spin fa-2x"></i></p>
+  </div>
+</div>
+
+
+

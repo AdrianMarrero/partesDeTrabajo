@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="text-right">
+    <button type="button" class="btn btn-primary"  routerLink="/list">Ver Partes</button>
+  </div>
+  <div class="row">
+    <div class="col">
+      <form>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <small class="form-text">Nº de Parte</small>
+              <input type="text"
+                    class="form-control"
+                    disabled="disabled">
+            </div>
+            <div class="col">
+              <small class="form-text">Fecha</small>
+              <div class="form-group">
+                <input type="text"
+                      class="form-control"
+                      disabled="disabled">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                <label class="custom-control-label" for="customControlInline">Enviar correo</label>
+              </div>
+            </div>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" value="teresa@desnudos.es" multiple>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col-sm-12">
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio1">Mantenimiento</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">Avería</label>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Lugar de trabajo</label>
+                  </div>
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>No especificado</option>
+                    <option value="1">Sebadal I</option>
+                    <option value="2">Sebadal II</option>
+                    <option value="3">Tiendas LP</option>
+                    <option value="4">Arucas</option>
+                    <option value="5">Maspalomas</option>
+                    <option value="6">Otros</option>
+                  </select>
+                </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+              <label for="exampleFormControlTextarea1">Trabajo Realizado</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Hora de Entrada</small>
+                <input  type="time"
+                        name="time-start"
+                        value="22:00"
+                        class="form-control">
+              </div>
+              <div class="col">
+                <small class="form-text">Hora de Salida</small>
+                <div class="form-group">
+                  <input  type="time"
+                          name="time-end"
+                          value="22:00"
+                          class="form-control">
+                </div>
+              </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Total Horas</small>
+                <input  type="text"
+                        name="time-total"
+                        value="4"
+                        class="form-control"
+                        disabled="disabled">
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Firmado por</small>
+                <input  type="text"
+                        name="firmante"
+                        class="form-control">
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="borrarFirma()">Borrar firma</button>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <button type="button" class="btn btn-success btn-lg btn-block">Guardar</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
