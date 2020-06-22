@@ -1,1 +1,191 @@
-<p>parte works!</p>
+<div class="container">
+  <div class="text-left">
+    <button type="button" class="btn btn-primary mb-2" routerLink="/list">Volver</button>
+  </div>
+  <div class="row">
+    <div class="col">
+      <form (ngSubmit)="actualizar( f )"
+            #f="ngForm">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <small class="form-text">Nº de Parte</small>
+              <input  type="text"
+                      class="form-control"
+                      name="parteNumero"
+                      value="{{parteNumero}}"
+                      disabled="disabled">
+            </div>
+            <div class="col">
+              <small class="form-text">Fecha</small>
+              <div class="form-group">
+                <input  type="text"
+                        class="form-control"
+                        name="fecha"
+                        value="{{parte.fecha | date}}"
+                        disabled="disabled">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                <label class="custom-control-label" for="customControlInline">Enviar correo</label>
+              </div>
+            </div>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" value="teresa@desnudos.es" multiple>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col-sm-4">
+              <div class="col">
+                <div class="custom-control custom-radio">
+                    <input  type="radio"
+                            id="customRadio1"
+                            value="Mantenimiento"
+                            name="tipoDeTrabajo"
+                            class="custom-control-input"
+                            [(ngModel)]="parte.tipoDeTrabajo">
+                    <label class="custom-control-label" for="customRadio1">Mantenimiento</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-control custom-radio">
+                  <input  type="radio"
+                          id="customRadio2"
+                          value="Avería"
+                          name="tipoDeTrabajo"
+                          class="custom-control-input"
+                          [(ngModel)]="parte.tipoDeTrabajo">
+                  <label class="custom-control-label" for="customRadio2">Avería</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-control custom-radio">
+                  <input  type="radio"
+                          id="customRadio3"
+                          value="Obra"
+                          name="tipoDeTrabajo"
+                          class="custom-control-input"
+                          [(ngModel)]="parte.tipoDeTrabajo">
+                  <label class="custom-control-label" for="customRadio3">Obra</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <span class="badge badge-warning padding-20" *ngIf="parte.tipoDeTrabajo === 'Obra'">Obra</span>
+              <span class="badge badge-danger padding-20" *ngIf="parte.tipoDeTrabajo === 'Avería'">Avería</span>
+              <span class="badge badge-primary padding-20" *ngIf="parte.tipoDeTrabajo === 'Mantenimiento'">Mantenimiento</span>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Lugar de trabajo</label>
+                  </div>
+                  <select name="lugar" class="custom-select" id="inputGroupSelect01" [(ngModel)]="parte.lugar">
+                    <option selected>No especificado</option>
+                    <option value="Sebadal I">Sebadal I</option>
+                    <option value="Sebadal II">Sebadal II</option>
+                    <option value="Tiendas LP">Tiendas LP</option>
+                    <option value="Arucas">Arucas</option>
+                    <option value="Maspalomas">Maspalomas</option>
+                    <option value="Otros">Otros</option>
+                  </select>
+                </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+              <label for="exampleFormControlTextarea1">Trabajo Realizado</label>
+              <textarea class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="8"
+                        [(ngModel)]="parte.trabajo_realizado"
+                        name="trabajo_realizado">
+                        {{parte.trabajo_realizado}}
+              </textarea>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Hora de Entrada</small>
+                <input  type="time"
+                        [(ngModel)]="parte.horaSalida"
+                        name="horaSalida"
+                        value="{{parte.horaEntrada}}"
+                        class="form-control">
+              </div>
+              <div class="col">
+                <small class="form-text">Hora de Salida</small>
+                <div class="form-group">
+                  <input  type="time"
+                          [(ngModel)]="parte.horaSalida"
+                          name="horaSalida"
+                          value="{{parte.horaSalida}}"
+                          class="form-control">
+                </div>
+              </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Total Horas</small>
+                <input  type="text"
+                        name="time-total"
+                        value="{{parte.totalHoras}}"
+                        class="form-control"
+                        disabled="disabled">
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <small class="form-text">Firmado por</small>
+                <input  type="text"
+                        [(ngModel)]="parte.firmante"
+                        name="firmante"
+                        value="{{parte.firmante}}"
+                        class="form-control">
+            </div>
+          </div>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="borrarFirma()">Borrar firma</button>
+
+          <hr>
+          <div class="row mt-2">
+            <div class="col">
+                <button type="submit"
+                        class="btn btn-success btn-lg btn-block">
+                Guardar
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

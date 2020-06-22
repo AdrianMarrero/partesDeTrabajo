@@ -1,13 +1,22 @@
 
 <div class="container">
 
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text">First and last name</span>
+  <div class="row">
+    <div class="col-9">
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Fecha de: hasta:</span>
+        </div>
+        <input type="date" [(ngModel)]="dateStart" name="dateStart" aria-label="First name" class="form-control">
+        <input type="date" [(ngModel)]="dateEnd" name="dateEnd" aria-label="Last name" class="form-control">
+        <button type="button" class="btn btn-primary ml-5"  (click)="consultar()">Consultar</button>
+      </div>
+    </form>
     </div>
-    <input type="text" aria-label="First name" class="form-control">
-    <input type="text" aria-label="Last name" class="form-control">
-    <button type="button" class="btn btn-primary ml-5">Consultar</button>
+    <div class="col-3">
+      <button type="button" class="btn btn-primary ml-5 float-right"  (click)="listAll()">Ver Todos</button>
+    </div>
   </div>
   <hr>
 
@@ -16,10 +25,10 @@
       <button type="button" class="btn btn-primary mb-2" routerLink="/nuevo-parte">Nuevo Parte</button>
     </div>
     <div class="col-sm-2">
-      <label class="badge badge-warning">Obra</label>
+      <label class="badge badge-warning">Obra: {{horasObra}} Horas</label>
     </div>
     <div class="col-sm-2">
-      <label class="badge badge-danger">Avería</label>
+      <label class="badge badge-danger">Avería: {{horasAveria}} Horas</label>
     </div>
     <div class="col-sm-6 text-right">
       <button type="button" class="btn btn-success btn-sm" (click)="habilitarEdicion()">Habilitar edición</button>
@@ -53,13 +62,13 @@
           <td>
             <button type="button"
                           class="btn btn-primary btn-sm" [disabled]="!editmode ? 'disabled': null"
-                          [routerLink]="['/parte', i]">
+                          [routerLink]="['/parte', i + 1]">
                           <i class="fa fa-pen"></i>
                           Editar
             </button>
           </td>
           <td>
-            <button type="button" class="btn btn-danger btn-sm" [disabled]="!editmode ? 'disabled': null"><i class="fa fa-trash"></i>Eliminar</button>
+            <button type="button" (click)="borrarParte(i+1)"  class="btn btn-danger btn-sm" [disabled]="!editmode ? 'disabled': null"><i class="fa fa-trash"></i>Eliminar</button>
           </td>
 
         </tr>
